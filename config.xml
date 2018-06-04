@@ -1,0 +1,6 @@
+<service>
+	<serviceName>juegos</serviceName>
+	<serviceDescription>Mostrar una galería de juegos para que los usuarios puedan distraerse y hacer apuestas con sus créditos</serviceDescription>
+	<creatorEmail>vilferalvarez@gmail.com</creatorEmail>
+	<serviceCategory>ocio</serviceCategory>
+</service>
