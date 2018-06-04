@@ -12,7 +12,7 @@ class Juegos extends Service
 	public function _main(Request $request){
 	$response = new Response();
 			$response->setCache();
-			$response->setResponseSubject("Que desea buscar en Google?");
+			$response->setResponseSubject("Que juego desea utilizar?");
 			$response->createFromTemplate("home.tpl", array());
 			return $response;
 }
