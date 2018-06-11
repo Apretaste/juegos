@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hola mundo</h1>
+    {link href="JUEGOS ppt" caption='<img src=img/logon.png alt=ppt>'  wait="true"}
 </body>
 </html>
