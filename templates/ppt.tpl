@@ -60,7 +60,7 @@
 
 </div>
 <div id="btn-main">
-{button href="JUEGOS PPT" popup="true" caption="Jugar" desc="n:Apuesta*|m:jugada[PIEDRA,PAPEL,TIJERA]" size="small"}
+{button href="JUEGOS PPT" popup="true" caption="Jugar" desc="n:Apuesta*|m:jugada[PIEDRA,PAPEL,TIJERA]*" size="small"}
 </div>
 
 <!--

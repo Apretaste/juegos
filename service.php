@@ -40,6 +40,7 @@ class Juegos extends Service
 
 		$opciones=["piedra","papel","tijera"];
 		$opcion=strtolower($params["opcion"]);
+
 		$vs=random_int(0,2);
 		$vs=$opciones[$vs];
 		
@@ -69,7 +70,7 @@ class Juegos extends Service
 				
 			}
 			else{
-				return new response();
+				return response();
 				
 			}
 			
