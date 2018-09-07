@@ -21,7 +21,10 @@ class Juegos extends Service
 	}
 
 	public function _ppt(Request $request){
-
+			$exist=Connection::query("SELECT * from _juegos_user where id_juego=1 and user='{$request->email}'");
+			
+			if(count($exist)==0)
+				Connection::query("INSERT INTO _juegos_user(id_juego,user) VALUES(1,'{$request->email}')");
 			$creditos=$this->gestionar_creditos($request->email);
 			$user = $this->utils->getUsernameFromEmail($request->email);
 		if(empty($request->query)){
@@ -85,11 +88,11 @@ class Juegos extends Service
 		$responseContent=["opcion"=>$opcion,"vs"=>$vs,"credit"=>$params["apuesta"],"usuario"=>$user];
 		if(isset($ganador)){
 			if($ganador){
-				$result=$this->gestionar_creditos($request->email,1,$params["apuesta"]);
+				$result=$this->gestionar_creditos($request->email,1,abs($params["apuesta"]));
 						$responseContent["resultado"]=true;
 			}
 			else{
-				$result=$this->gestionar_creditos($request->email,2,$params["apuesta"]);
+				$result=$this->gestionar_creditos($request->email,2,abs($params["apuesta"]));
 
 					$responseContent["resultado"]=false;
 			}
@@ -114,20 +117,28 @@ class Juegos extends Service
 				break;
 			case 1:
 				$sql="UPDATE person SET credit=credit+{$apuesta} WHERE email = '{$usuario}'";
+				$sql1="UPDATE _juegos_user set win=win+1,score=score+3 where id_juego=1 and user='{$usuario}'";
 				break;
 			case 2:
 				$sql="UPDATE person SET credit=credit-{$apuesta} WHERE email = '{$usuario}'";
+				$sql1="UPDATE _juegos_user set lose=lose+1 where id_juego=1 and user='{$usuario}'";
 				break;
 			default:
 				# code...
 				break;
 		}
+		if(isset($sql1)){
+			$result=Connection::query($sql1);
+		}
 			
 		$creditos=Connection::query($sql);
 		
-			return $creditos;
+		
+		return $creditos;
 		
 	}
+
+	
 	
 	private function proccessParams($request, $default)
 	{
@@ -152,6 +163,19 @@ class Juegos extends Service
 		}
 
 		return $params;
+	}
+
+	public function _ver_ranking(Request $request){
+		$juego=strtolower($request->query);
+
+		$score=Connection::query("SELECT * from _juegos_user where user='{$request->email}'");
+		$listado=Connection::query("SELECT * from _juegos_user,_juegos where _juegos_user.id_juego=_juegos.id and _juegos.seudonimo='{$juego}' order by score DESC LIMIT 10");
+	
+		$response = new Response();
+			$response->setCache();
+			$response->setResponseSubject("Ranking");
+			$response->createFromTemplate("ranking.tpl",["listado"=>$listado,"score"=>$score,"juego"=>$request->query]);
+			return $response;
 	}
 	
 }

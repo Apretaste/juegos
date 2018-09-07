@@ -55,6 +55,7 @@
 	<div class="container">
 	<div id="menu">
 		{button href="JUEGOS PPT" caption="&#8592;Ir al inicio" size="small"}
+		
 		</div>
 	<h1>Resultado</h1>
 	{if isset($datos["error"])}

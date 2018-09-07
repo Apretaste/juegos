@@ -17,18 +17,20 @@
 	}
 	#btn-main{
 		text-align: center;
+		font-size: 2em;
 	}
 	#btn-main a{
 		padding: 2em;
 		font-weight: bold;
 		font-size: 4em;
 	}
-	#menu{
+	.menu{
 		position: relative;
+		min-height: 3em;
 	}
-	#creditos{
+	#creditos,#btn-atras{
 		position: absolute;
-		top: 0;
+		bottom: 0;
 		right: 0;
 	}
 	h3{
@@ -42,9 +44,13 @@
 </head>
 <body>
 	<div id="container">
-	<div id="menu">
+	<div class="menu">
 		<p>{button href="JUEGOS"  caption="&#8592;Juegos"  size="small"}</p>
 	<p id="creditos">credito:§{$datos['creditos']}</p>
+	
+	</div>
+	<div class="menu">
+		<p id="btn-atras">{button href="JUEGOS VER_RANKING PPT" caption="Ver Ranking" size="small"}</p>
 	</div>
 	
 <h1>Piedra&#9994; papel&#9995; o tijera&#9996;</h1>
